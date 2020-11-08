@@ -1,1 +1,1 @@
-# twitter-cloner
+# twitter-clone

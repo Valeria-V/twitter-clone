@@ -87,13 +87,31 @@ class Usuario extends Model {
                 $valido = false; 
             }    
         }
-
+        //cria exceção de para a validação
         if(!$valido) {
             throw new \Exception(print_r($this->errors,true),1);
         }
         return $valido;
     }
 
-
     //recuperar um usuário por e-mail
+    public function getUsuarioPorEmail(){
+        $query = "select email from usuarios where email = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':email', $this->__get('email'));
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC); //array associativo
+        # code...
+    }
+
+    public function getUsuarioPorNome(){
+        $query = "select nome from usuarios where nome = :nome";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':nome', $this->__get('nome'));
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC); //array associativo
+        # code...
+    }
 }
